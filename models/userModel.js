@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const db = require('../database/dbConfig');
-const tokenUtil = require('../Auth/token');
+
 
 async function insertUser(user) {
     //TODO start your code right here
