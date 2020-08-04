@@ -10,9 +10,8 @@ router.get('/', function(req, res){
 });
 
 router.post('/userSignup', async function(req, res){
-
   const actual = await userModel.insertUser(req.body);
-  res.json(actual);
+  return res.json(actual);
 });
 
 router.post('/authenticateUser', async function (req,res) {
@@ -20,7 +19,7 @@ router.post('/authenticateUser', async function (req,res) {
 
   const userInfo = await userModel.getUserByEmail(req.body.email);
   if(userInfo.length === 0||!bcrypt.compareSync(req.body.password, userInfo[0].password)){
-    res.json({process:"fail"});
+    return res.json({process:"fail"});
   }
   else{
     const userDataPacket = {
@@ -45,9 +44,9 @@ router.get('/userInterface', async function (req,res){
   if(userinfo) {
     const userItems = await orderModel.getItemByUserID(userinfo);
 
-    res.json(userItems);
+    return res.json(userItems);
   }else{
-    res.json({process:'fail'});
+    return res.json({process:'fail'});
   }
 
 
@@ -58,9 +57,9 @@ router.post('/change', async function (req,res) {
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
   if(userinfo) {
     const actual = await orderModel.changeItem(req.body);
-    res.json(actual);
+    return res.json(actual);
   }else{
-    res.json({process:"fail"})
+    return res.json({process:"fail"})
   }
 });
 
@@ -68,9 +67,9 @@ router.post('/delete', async function (req,res) {
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
   if(userinfo) {
     const actual = await orderModel.deleteItem(req.body);
-    res.json(actual);
+    return res.json(actual);
   }else{
-    res.json({process:"fail"})
+    return res.json({process:"fail"})
   }
 });
 
@@ -79,9 +78,9 @@ router.post('/create_order', async function (req,res) {
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
   if(userinfo){
     const actual = await orderModel.insertItem(req.body);
-    res.json(actual);
+    return res.json(actual);
   }else{
-    res.json({process:"fail"});
+    return res.json({process:"fail"});
   }
 });
 
