@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../models/userModel');
 const orderModel = require('../models/orderModel');
-const tokenUtil = require('../Auth/token');
+const tokenUtil = require('../auth/token');
 const bcrypt = require('bcrypt');
 
 router.get('/', function(req, res){
