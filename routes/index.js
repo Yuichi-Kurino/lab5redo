@@ -18,14 +18,14 @@ router.post('/userSignup', async function(req, res){
 router.post('/authenticateUser', async function (req,res) {
   //check our own database
 
-  const userInfo = await userModel.getUserByNumber(req.body.email);
+  const userInfo = await userModel.getUserByNumber(req.body.number);
   if(userInfo.length === 0||!bcrypt.compareSync(req.body.password, userInfo[0].password)){
     res.json({process:"fail"});
   }
   else{
     const userDataPacket = {
       id:userInfo[0].uid,
-      email: userInfo[0].email
+      number: userInfo[0].number
     };
     const token = await tokenUtil.generateToken(userDataPacket);
     if(!token){
