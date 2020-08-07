@@ -7,7 +7,7 @@ async function insertUser(user) {
     try {
 
         await db('users')
-            .insert({number:user.number, password: bcrypt.hashSync(user.password,0)});
+            .insert({phoneNumber:user.number, password: bcrypt.hashSync(user.password,0)});
         return {process:"success"};
     }catch(err){
         console.error("Insert failed in users", err);
