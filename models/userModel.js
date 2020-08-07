@@ -7,7 +7,7 @@ async function insertUser(user) {
     try {
 
         await db('users')
-            .insert({email:user.email, password: bcrypt.hashSync(user.password,0)});
+            .insert({number:user.number, password: bcrypt.hashSync(user.password,0)});
         return {process:"success"};
     }catch(err){
         console.error("Insert failed in users", err);
@@ -28,14 +28,14 @@ async function getUserByID(id){
     }
 }
 
-async function getUserByEmail(email){
+async function getUserByNumber(number){
     try {
         return await db('users')
             .select('*')
-            .where('email',email);
+            .where('number',number);
 
     }catch(err){
-        console.error("getUserByEmail failed in users", err);
+        console.error("getUserByNumber failed in users", err);
         return {process:"fail"};
     }
 }
@@ -47,13 +47,13 @@ async function getUserByID(id){
             .where('id',id);
 
     }catch(err){
-        console.error("getUserByEmail failed in users", err);
+        console.error("getUserByNumber failed in users", err);
         return {process:"fail"};
     }
 }
 
-module.exports={insertUser,getUserByEmail,getUserByID};
+module.exports={insertUser,getUserByNumber,getUserByID};
 
 // async function insertUser(userJSON);
 // async funcion getUserByID(id);
-// async function getUserByEmail(email);
+// async function getUserByNumber(number);

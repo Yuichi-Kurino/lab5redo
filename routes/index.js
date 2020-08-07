@@ -18,7 +18,7 @@ router.post('/userSignup', async function(req, res){
 router.post('/authenticateUser', async function (req,res) {
   //check our own database
 
-  const userInfo = await userModel.getUserByEmail(req.body.email);
+  const userInfo = await userModel.getUserByNumber(req.body.email);
   if(userInfo.length === 0||!bcrypt.compareSync(req.body.password, userInfo[0].password)){
     res.json({process:"fail"});
   }
