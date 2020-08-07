@@ -5,7 +5,7 @@ const db = require('../database/dbConfig');
 async function insertUser(user) {
     //TODO start your code right here
     try {
-
+        console.log(user);
         await db('users')
             .insert({phoneNumber:user.number, password: bcrypt.hashSync(user.password,0)});
         return {process:"success"};

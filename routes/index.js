@@ -10,14 +10,14 @@ router.get('/', function(req, res){
 });
 
 router.post('/userSignup', async function(req, res){
-
+  console.log(req.body);
   const actual = await userModel.insertUser(req.body);
   res.json(actual);
 });
 
 router.post('/authenticateUser', async function (req,res) {
   //check our own database
-
+  console.log(req.body);
   const userInfo = await userModel.getUserByNumber(req.body.number);
   if(userInfo.length === 0||!bcrypt.compareSync(req.body.password, userInfo[0].password)){
     res.json({process:"fail"});
