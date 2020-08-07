@@ -32,7 +32,7 @@ async function getUserByNumber(number){
     try {
         return await db('users')
             .select('*')
-            .where('number',number);
+            .where('phoneNumber',number);
 
     }catch(err){
         console.error("getUserByNumber failed in users", err);
