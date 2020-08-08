@@ -1,10 +1,12 @@
 const db = require('../database/dbConfig');
 
 async function getItemByUserID(id){
+    console.log(id.userDataPacket.id)
     try {
         return await db('users')
             .select('itemInfo','pid')
-            .join('items', {'users.uid': 'items.uid'});
+            .join('items', {'users.uid': 'items.uid'})
+            .where({'users.uid':id.userDataPacket.id});
 
     }catch(err){
         console.error("getItemByUserID failed in items", err);

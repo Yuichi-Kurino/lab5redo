@@ -42,10 +42,9 @@ router.post('/authenticateUser', async function (req,res) {
 router.get('/userInterface', async function (req,res){
 
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
-
+  console.log(userinfo);
   if(userinfo) {
     const userItems = await orderModel.getItemByUserID(userinfo);
-
     res.json(userItems);
   }else{
     res.json({process:'fail'});
