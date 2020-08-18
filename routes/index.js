@@ -78,11 +78,14 @@ router.post('/create_order', async function (req,res) {
   console.log(req.cookies);
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
   if(userinfo){
-    const actual = await orderModel.insertItem(req.body);
+    const itemInfo = {
+      ...req.body,
+      uid: userinfo.id
+    }
+    const actual = await orderModel.insertItem(itemInfo);
     res.json(actual);
   }else{
     res.json({process:"fail"});
   }
 });
-
 module.exports = router;
