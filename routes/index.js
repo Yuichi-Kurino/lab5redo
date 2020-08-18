@@ -77,12 +77,12 @@ router.post('/delete', async function (req,res) {
 router.post('/create_order', async function (req,res) {
   console.log(req.cookies);
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
-  console.log('this is the userinfo', userinfo);
+
   if(userinfo){
     const itemInfo = {
       ...req.body,
-      uid: userinfo[0].uid
-    }
+      uid: userinfo.userDataPacket.id
+    };
     const actual = await orderModel.insertItem(itemInfo);
     res.json(actual);
   }else{
