@@ -77,7 +77,7 @@ router.post('/delete', async function (req,res) {
 router.post('/create_order', async function (req,res) {
   console.log(req.cookies);
   const userinfo = await tokenUtil.validateToken(req.cookies.userToken);
-  console.log(userinfo[0]);
+  console.log('this is the userinfo', userinfo);
   if(userinfo){
     const itemInfo = {
       ...req.body,
